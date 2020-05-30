@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha -w src/test/*.js",
+    "start": "node index.js",
+    "prod": "cross-env NODE_ENV=prod node index.js"
   },
   "repository": {
     "type": "git",
@@ -18,11 +20,15 @@
   },
   "homepage": "https://github.com/GadsDev/UniMaps-Back#readme",
   "dependencies": {
+    "@hapi/boom": "^9.1.0",
+    "@hapi/hapi": "^19.1.1",
+    "@hapi/inert": "^6.0.1",
+    "@hapi/joi": "^17.1.1",
+    "@hapi/vision": "^6.0.0",
     "bcrypt": "^4.0.1",
     "boom": "^7.3.0",
     "cross-env": "^7.0.2",
     "dotenv": "^8.2.0",
-    "hapi": "^18.1.0",
     "hapi-auth-jwt2": "^10.1.0",
     "hapi-cors": "^1.0.3",
     "hapi-swagger": "^13.0.2",
