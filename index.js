@@ -29,7 +29,10 @@ const authRoute = require('./src/routes/authRoutes');
 
 // Criar o servidor com suas configurações
 const server = Hapi.Server({
-    port: process.env.PORT
+    port: process.env.PORT,
+    routes: {
+        cors: true
+    }
 });
 
 //Função que conecta o servidor
@@ -56,8 +59,7 @@ async function connectServer() {
         {
             plugin: HapiSwagger,
             options: swaggerOptions,
-        },
-
+        }
     ]);
     server.auth.strategy('jwt', 'jwt', {
         key: process.env.JWT_SECRET,

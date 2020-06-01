@@ -29,10 +29,10 @@ describe('Suite de testes de Autenticação', function () {
         app = await server;
 
         const mongoREsult = await Mongo;
-        console.log("mongoREsult", mongoREsult);
         
         // Tenta criar se já existe atualiza
         try {
+            await userCrud.create(USER);
             result = await userCrud.create(USER);
         } catch (error) {
             result = await userCrud.update(null, USER, true);
@@ -62,7 +62,8 @@ describe('Suite de testes de Autenticação', function () {
         const { 
             message,
             _id
-         } = JSON.parse(result.payload);
+        } = JSON.parse(result.payload);
+        
         // If não cadastrado
         if(statusCode === 200) {
             assert.ok(statusCode === 200);

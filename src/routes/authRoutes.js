@@ -31,7 +31,7 @@ module.exports = {
                 notes: 'Faz login com user e senha do banco',                    
                 validate: {
                     failAction,
-                    query: joi.object({
+                    payload: joi.object({
                         username: joi.string(),
                         password: joi.string().required(),
                         email: joi.string().required(),
@@ -42,7 +42,7 @@ module.exports = {
                 const {
                     email,
                     password,
-                } = request.params;
+                } = request.payload;
 
                 const [user] = await UserCrud.read({
                     email: email
@@ -54,7 +54,6 @@ module.exports = {
                 }
 
                 const match = await PasswordHelper.comparePassword(password, user.password)
-                console.log('User ', match)
                 if (!match) {
                     return boom.unauthorized('O Usuario ou a Senha invalido');
                 }
